@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus - Gestión Residencial Avanzada</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- PANTALLA DE AUTENTICACIÓN -->
+    <div id="auth-screen" class="auth-container">
+        <div class="auth-card">
+            <div class="auth-logo">
+                <i class="fa-solid fa-cube"></i>
+                <h1>Nexus</h1>
+                <p>Plataforma de Control Residencial</p>
+            </div>
+            
+            <div class="role-selector">
+                <button type="button" class="role-btn active" id="btn-role-residente" onclick="setRole('residente')">
+                    <i class="fa-solid fa-house-user"></i> Soy Residente
+                </button>
+                <button type="button" class="role-btn" id="btn-role-admin" onclick="setRole('admin')">
+                    <i class="fa-solid fa-user-shield"></i> Administrador
+                </button>
+            </div>
+
+            <form id="login-form" onsubmit="handleLogin(event)">
+                <div id="residente-fields" class="input-group">
+                    <label for="input-apto"><i class="fa-solid fa-door-closed"></i> Número de Apartamento</label>
+                    <input type="text" id="input-apto" placeholder="Ej. 101, 305, 1204" autocomplete="off">
+                </div>
+
+                <div class="input-group">
+                    <label for="input-pass"><i class="fa-solid fa-lock"></i> Contraseña</label>
+                    <input type="password" id="input-pass" placeholder="••••••••" required>
+                    <small class="hint-pass">Contraseña inicial genérica: <b>nexus2026</b></small>
+                </div>
+
+                <button type="submit" class="btn-primary">
+                    <span>Iniciar Sesión</span> <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+            <div id="auth-error" class="auth-error hidden"></div>
+        </div>
+    </div>
+
+    <!-- APLICACIÓN PRINCIPAL -->
+    <div id="app-screen" class="app-layout hidden">
+        
+        <!-- SIDEBAR (Visible en Tablet/PC) -->
+        <aside class="sidebar" id="sidebar-nav">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-cube"></i>
+                <span>Nexus</span>
+            </div>
+            <div class="user-badge" id="sidebar-user-info"></div>
+            <nav class="sidebar-menu" id="desktop-menu"></nav>
+            <div class="sidebar-footer">
+                <button onclick="logout()" class="btn-logout">
+                    <i class="fa-solid fa-power-off"></i> Cerrar Sesión
+                </button>
+            </div>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-title">
+                    <span id="current-view-title">Tablero</span>
+                </div>
+                <div class="topbar-profile">
+                    <span id="topbar-user-tag" class="user-tag">Apto 101</span>
+                    <button onclick="logout()" class="mobile-logout-btn" title="Cerrar sesión"><i class="fa-solid fa-power-off"></i></button>
+                </div>
+            </header>
+
+            <div class="content-body" id="dynamic-content"></div>
+        </main>
+
+        <!-- BOTTOM NAV (Visible solo en Celulares) -->
+        <nav class="mobile-bottom-nav" id="mobile-nav"></nav>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
